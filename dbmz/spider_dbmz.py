@@ -1,8 +1,6 @@
 __author__ = 'yph'
 
-import urllib
 import urllib2
-import re
 from HTMLParser import HTMLParser
 import sys
 reload(sys)
@@ -12,15 +10,21 @@ import cookielib
 from time import sleep
 
 #path to store the pictures
-pic_dir = r'C:\dbmz'
+#The following three vars need to be configured
+pic_dir = r'/home/yph/dbmz'
+enable_proxy = False
+http_proxy = r'http://proxy02.cd.intel.com:911'
+
 
 page_pics = 0
 total_pics = 0
 
-enable_proxy = True
-proxy_handler = urllib2.ProxyHandler({"http":"http://proxy02.cd.intel.com:911"})
-null_proxy_handler = urllib2.ProxyHandler({})
-
+proxy_handler = None
+if enable_proxy:
+    proxy_handler = urllib2.ProxyHandler({"http":http_proxy})
+else:
+    proxy_handler = urllib2.ProxyHandler({})
+    
 
 user_agent = r'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 headers = { 'User-Agent' : user_agent}
